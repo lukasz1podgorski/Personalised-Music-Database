@@ -33,6 +33,14 @@ def select_from_table():
     conn.close()
 
 
+def select_a_genre(genre):
+    for row in c.execute('SELECT * FROM new_releases WHERE artist_genre '
+                         'LIKE ? ORDER BY release_date', ('%'+genre+'%',)):
+        print(row)
+
+    conn.close()
+
+
 def clear_the_table():
     c.execute('DELETE FROM new_releases')
     conn.commit()
