@@ -51,3 +51,15 @@ elif insert_to_db_bool == "N":
     db_data.clear()
 else:
     print("Please answer with Y or N.")
+
+show_genre_releases_bool = input("Do you want to show genre specific releases? (Y/N)")
+
+if show_genre_releases_bool == 'Y':
+    genre_to_query = input("Please specify which genre you are interested in: ")
+    genre = genre_to_query
+    print("Please find the database results specific to genre " + genre + " in the entries below:")
+    select_a_genre(genre)
+elif show_genre_releases_bool == "N":
+    db_data.clear()
+else:
+    print("Please answer with Y or N.")
