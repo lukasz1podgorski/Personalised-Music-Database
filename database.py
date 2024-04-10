@@ -1,4 +1,6 @@
 import sqlite3
+import time
+from xlsxwriter.workbook import Workbook
 
 conn = sqlite3.connect("new_spotify_releases.sqlite")
 c = conn.cursor()
@@ -12,7 +14,7 @@ new_releases_data = [
 
 def create_table():
     c.execute("CREATE TABLE new_releases(artist_name, release_name, release_date, artist_genre)")
-    conn.close()
+    # conn.close()
 
 
 def insert_to_table(insert_data):
@@ -30,18 +32,38 @@ def select_from_table():
     for row in c.execute('SELECT * FROM new_releases ORDER BY release_date'):
         print(row)
 
-    conn.close()
+    # conn.close()
 
 
 def select_a_genre(genre):
     for row in c.execute('SELECT * FROM new_releases WHERE artist_genre '
-                         'LIKE ? ORDER BY release_date', ('%'+genre+'%',)):
+                         'LIKE ? ORDER BY release_date', ('%' + genre + '%',)):
         print(row)
 
-    conn.close()
+    # conn.close()
+
+
+def write_to_xls():
+    time_string = time.strftime("%Y%m%d-%H%M%S")
+    workbook = Workbook(f'export_{time_string}.xlsx')
+    worksheet = workbook.add_worksheet()
+    column_names = ["Artist", "Album title", "Release date", "Genre"]
+    for j, column_name in enumerate(column_names):
+        worksheet.write(0, j, column_name)
+
+    c.execute("SELECT * FROM new_releases")
+    selection = c.execute("SELECT * FROM new_releases ")
+    for i, row in enumerate(selection, start=1):
+        for j, value in enumerate(row):
+            worksheet.write(i, j, row[j])
+    workbook.close()
 
 
 def clear_the_table():
     c.execute('DELETE FROM new_releases')
     conn.commit()
+    # conn.close()
+
+
+def close_the_db():
     conn.close()

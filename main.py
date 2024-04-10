@@ -52,6 +52,16 @@ elif insert_to_db_bool == "N":
 else:
     print("Please answer with Y or N.")
 
+write_to_xlsx_bool = input("Do you want to export the results to the Excel file? (Y/N)")
+
+if write_to_xlsx_bool == 'Y':
+    write_to_xls()
+    print("Writing to the Excel file...Done!")
+elif write_to_xlsx_bool == "N":
+    db_data.clear()
+else:
+    print("Please answer with Y or N.")
+
 show_genre_releases_bool = input("Do you want to show genre specific releases? (Y/N)")
 
 if show_genre_releases_bool == 'Y':
@@ -63,3 +73,5 @@ elif show_genre_releases_bool == "N":
     db_data.clear()
 else:
     print("Please answer with Y or N.")
+
+close_the_db()
