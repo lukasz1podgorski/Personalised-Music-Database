@@ -48,8 +48,8 @@ def write_to_xls():
     workbook = Workbook(f'export_{time_string}.xlsx')
     worksheet = workbook.add_worksheet()
     column_names = ["Artist", "Album title", "Release date", "Genre"]
-    for j, column_name in enumerate(column_names):
-        worksheet.write(0, j, column_name)
+    for k, column_name in enumerate(column_names):
+        worksheet.write(0, k, column_name)
 
     c.execute("SELECT * FROM new_releases")
     selection = c.execute("SELECT * FROM new_releases ")
