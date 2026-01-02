@@ -4,5 +4,7 @@
 *.xlsx
 venv/
 .idea/
-__pycache__/
+app/__pycache__/
+tests/__pycache__/
 *.pyc
+__init__.py
