@@ -18,6 +18,7 @@ def create_table():
 
 
 def insert_to_table(insert_data):
+    c.execute("CREATE TABLE IF NOT EXISTS new_releases(artist_name, release_name, release_date, artist_genre)")
     c.executemany("INSERT INTO new_releases VALUES(?, ?, ?, ?)", insert_data)
     conn.commit()
 

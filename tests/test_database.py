@@ -1,4 +1,4 @@
-import database as database
+from app import database as database
 import unittest.mock as mock
 
 
